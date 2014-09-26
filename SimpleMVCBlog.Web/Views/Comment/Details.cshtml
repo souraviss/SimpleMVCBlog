@@ -1,0 +1,43 @@
+﻿@model CommentView
+
+<div class="media" id="comment-@Model.Id">
+    @if (string.IsNullOrEmpty(Model.UserAvatar))
+    {
+        <a class="pull-left" href="/Account/UserProfile/@Model.UserId">
+            <i class="fa fa-user fa-5x"></i>
+        </a>
+    }
+    else
+    {
+        <a class="pull-left" href="/Account/UserProfile/@Model.UserId">
+            <img class="media-object" src="@Model.UserAvatar" alt="">
+        </a>
+    }
+    <div class="media-body">
+        <p>
+            @Model.UserName
+        </p>
+        <p>
+            @Model.Content
+        </p>
+        <ul class="text-muted list-inline">
+            <li><i class="fa fa-clock-o"></i> @Model.CreatedTime</li>
+            @*<li><i class="fa fa-cog"></i> <a href="#">Edit</a></li>*@
+            @if (Model.CanDelete)
+            {
+                <li>
+                @using (Ajax.BeginForm("Delete", "Comment", new AjaxOptions
+                {
+                    OnSuccess = "onSuccessDeleteComment"
+                }))
+                {
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <input value="Delete" type="submit" class="btn btn-default" />
+                }
+                </li>
+            }
+        </ul>
+    </div>
+
+</div>
+    

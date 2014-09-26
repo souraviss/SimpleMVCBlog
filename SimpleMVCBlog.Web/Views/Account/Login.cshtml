@@ -1,0 +1,83 @@
+﻿@using SimpleMVCBlog.Web.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="page-tip animated slideInDown">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Please sign in before you proceed. If you are not a member, <a href="/Account/Register">create an account</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-6">
+            <h3 class="hl top-zero">Sign in to @Request.Url.Host</h3>
+            <hr>
+            <p>Our site supports several methods to verify your identity. Sign in to get instant access to all of our features.</p>
+            <!-- Social icons -->
+            <div class="login-social">
+                <ul>
+                    <li id="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li id="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li id="google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                </ul>
+            </div>
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+            <div class="clearfix"></div>
+        </div>
+        <!-- Login Box -->
+        <div class="col-md-4 col-sm-6">
+            <div class="form-box">
+                <h4>Sign In</h4>
+                <hr>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputEmail1">Email address</label>
+                        <input type="email" name="Email" class="form-control" placeholder="Enter email" data-original-title="" title="">
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputPassword1">Password</label>
+                        <input type="password" name="Password" class="form-control" placeholder="Password" data-original-title="" title="">
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-green">Submit</button>
+                }
+                <hr>
+                <p>Not registered? <a href="/Account/Register">Create an Account.</a></p>
+                <div class="pwd-lost">
+                    <div class="pwd-lost-q show">Lost your password? <a href="#">Click here to recover.</a></div>
+                    <div class="pwd-lost-f hidden">
+                        <p class="text-muted">Enter your email address and we will send you a link to reset your password.</p>
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="sr-only" for="email-pwd">Email address</label>
+                                <input type="email" class="form-control" id="email-pwd" placeholder="Enter email">
+                            </div>
+                            <button type="submit" class="btn btn-blue">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

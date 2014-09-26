@@ -1,0 +1,15 @@
+﻿@model SearchView
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="row">
+    <h2>Search Result for "@Model.Query"</h2>
+    <!-- Articles List -->
+    @Html.Partial("~/Views/Articles/_List.cshtml", Model.ArticlesListView)
+    <!-- Pagination -->
+    @Html.Partial("~/Views/Articles/_Pagination.cshtml", Model.ArticlesListView)
+</div>
+

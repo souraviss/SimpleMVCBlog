@@ -1,0 +1,124 @@
+﻿@model ArticlesListView
+
+@{
+    ViewBag.Title = "Articles";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+
+
+<div class="col-sm-8 blog-summary-list">
+    <!-- Articles List -->
+    @Html.Partial("_List", Model)
+    <!-- Pagination -->
+    @Html.Partial("_Pagination", Model)
+</div>
+<div class="col-sm-4">
+    <!-- Social Links -->
+    <h3 class="hl">Bookmark</h3>
+    <hr>
+    <div class="social-icons social-icons-default">
+        <ul>
+            <li class="rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li class="github"><a href="#"><i class="fa fa-github"></i></a></li>
+            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li class="vk"><a href="#"><i class="fa fa-vk"></i></a></li>
+            <li class="plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li class="dropbox"><a href="#"><i class="fa fa-dropbox"></i></a></li>
+            <li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+
+    <!-- Recently Added -->
+    @Html.Action("Recent", "Articles")
+
+    <!-- Tags -->
+    <h3 class="hl">Popular Tags</h3>
+    <hr>
+    @Html.Action("Popular", "Keyword")
+    <br>
+
+    <!-- Archive -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Archive</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- Years -->
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#2013" data-toggle="tab">2013</a></li>
+                        <li><a href="#2012" data-toggle="tab">2012</a></li>
+                        <li><a href="#2011" data-toggle="tab">2011</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- Months -->
+                    <div class="tab-content blog-months">
+                        <div class="tab-pane active" id="2013">
+                            <ul class="nav nav-pills nav-stacked pull-left">
+                                <li><a href="#">Jan <span class="badge">15</span></a></li>
+                                <li><a href="#">Feb <span class="badge">23</span></a></li>
+                                <li><a href="#">Mar <span class="badge">45</span></a></li>
+                                <li><a href="#">Apr <span class="badge">12</span></a></li>
+                                <li><a href="#">May <span class="badge">10</span></a></li>
+                                <li><a href="#">Jun <span class="badge">9</span></a></li>
+                            </ul>
+                            <ul class="nav nav-pills nav-stacked pull-left">
+                                <li><a href="#">Jul <span class="badge">14</span></a></li>
+                                <li><a href="#">Aug <span class="badge">19</span></a></li>
+                                <li><a href="#">Sep <span class="badge">32</span></a></li>
+                                <li><a href="#">Oct <span class="badge">23</span></a></li>
+                                <li><a href="#">Nov <span class="badge">8</span></a></li>
+                                <li><a href="#">Dec <span class="badge">9</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="2012">
+                            <ul class="nav nav-pills nav-stacked pull-left">
+                                <li><a href="#">Jan <span class="badge">10</span></a></li>
+                                <li><a href="#">Feb <span class="badge">13</span></a></li>
+                                <li><a href="#">Mar <span class="badge">5</span></a></li>
+                                <li><a href="#">Apr <span class="badge">21</span></a></li>
+                                <li><a href="#">May <span class="badge">12</span></a></li>
+                                <li><a href="#">Jun <span class="badge">12</span></a></li>
+                            </ul>
+                            <ul class="nav nav-pills nav-stacked pull-left">
+                                <li><a href="#">Jul <span class="badge">19</span></a></li>
+                                <li><a href="#">Aug <span class="badge">16</span></a></li>
+                                <li><a href="#">Sep <span class="badge">17</span></a></li>
+                                <li><a href="#">Oct <span class="badge">9</span></a></li>
+                                <li><a href="#">Nov <span class="badge">13</span></a></li>
+                                <li><a href="#">Dec <span class="badge">12</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="2011">
+                            <ul class="nav nav-pills nav-stacked pull-left">
+                                <li><a href="#">Jan <span class="badge">13</span></a></li>
+                                <li><a href="#">Feb <span class="badge">22</span></a></li>
+                                <li><a href="#">Mar <span class="badge">12</span></a></li>
+                                <li><a href="#">Apr <span class="badge">14</span></a></li>
+                                <li><a href="#">May <span class="badge">11</span></a></li>
+                                <li><a href="#">Jun <span class="badge">19</span></a></li>
+                            </ul>
+                            <ul class="nav nav-pills nav-stacked pull-left">
+                                <li><a href="#">Jul <span class="badge">16</span></a></li>
+                                <li><a href="#">Aug <span class="badge">18</span></a></li>
+                                <li><a href="#">Sep <span class="badge">31</span></a></li>
+                                <li><a href="#">Oct <span class="badge">22</span></a></li>
+                                <li><a href="#">Nov <span class="badge">23</span></a></li>
+                                <li><a href="#">Dec <span class="badge">11</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

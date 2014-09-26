@@ -1,0 +1,157 @@
+﻿@model ArticleView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+
+<!-- Blog Post Content Column -->
+<div class="col-lg-8">
+
+    <h4><a href="blog-post.html">@Model.Title</a></h4>
+    <ul class="text-muted list-inline">
+        <li><i class="fa fa-user"></i>@Html.ActionLink(Model.CreatedDisplayName, "Profile", "User", new { id = Model.CreatedUserId})</li>
+        <li><i class="fa fa-calendar"></i> @Model.CreatedTime </li>
+        <li><i class="fa fa-comments-o"></i> <span id="cmt-count">@Model.Comments.Count</span> comments</li>
+    </ul>
+    <hr>
+    <p class="blog-text">
+        @Html.Raw(HttpUtility.HtmlDecode(Model.MainContent))
+    </p>
+
+    <p>
+        @Html.Action("VoteControl", "Articles", new { id = Model.Id})
+    </p>
+    <!-- Blog Comments -->
+    <!-- Comments Form -->
+    <div class="new-comment">
+        @Html.Partial("~/Views/Comment/CommentForm.cshtml", new CommentModel { ArticleId = Model.Id, UserName = Model.LoggedDisplayName })
+    </div>
+    
+    
+
+    <!-- Posted Comments -->
+    <!-- Comment -->
+    <h4>@Model.Comments.Count comments</h4>
+    <hr>
+    <div id="comments-list">
+        @for (int i = 0; i < Model.Comments.Count; i++)
+        {
+            @Html.Partial("~/Views/Comment/Details.cshtml", Model.Comments[i])
+        }
+    </div>
+
+</div>
+
+   
+<!-- Blog Sidebar Widgets Column -->
+<div class="col-sm-4">
+    <!-- Social Links -->
+    <div class="block-header">
+        <h2>
+            <span class="title"> Bookmark </span>
+            <span class="decoration"></span>
+            <span class="decoration"></span>
+            <span class="decoration"></span>
+        </h2>
+    </div>
+    
+    <div class="social-icons social-icons-default">
+        <ul>
+            <li class="rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li class="github"><a href="#"><i class="fa fa-github"></i></a></li>
+            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li class="vk"><a href="#"><i class="fa fa-vk"></i></a></li>
+            <li class="plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li class="dropbox"><a href="#"><i class="fa fa-dropbox"></i></a></li>
+            <li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+
+    <hr>
+    <!-- Tags -->
+    <div class="block-header">
+        <h2>
+            <span class="title"> Keywords </span>
+            <span class="decoration"></span>
+            <span class="decoration"></span>
+            <span class="decoration"></span>
+        </h2>
+    </div>
+    @Html.Action("Popular", "Keyword")
+    <hr>
+
+    <!-- Recently Added -->
+    <div class="block-header">
+        <h2>
+            <span class="title"> Rencent Added </span>
+            <span class="decoration"></span>
+            <span class="decoration"></span>
+            <span class="decoration"></span>
+        </h2>
+    </div>
+    @Html.Action("Recent","Articles")
+    
+</div>
+
+
+@section scripts
+{
+    <script>
+        var onSuccessComment = function (e)
+        {
+            console.log(e);
+            if (e.success == true) {
+                $("#comments-list").append(e.content);
+                refreshCommentCount();
+            }
+            else
+            {
+                $("#comment-input").html(e.content);
+                jQuery.validator.unobtrusive.parse($("#comment-input"));
+            };
+            $("#comment-form")[0].reset();
+        }
+        var onSuccessDeleteComment = function (e)
+        {
+            console.log(e);
+            if (e.success == true) {
+                $("#comment-" + e.id).remove();
+                refreshCommentCount();
+            }
+            else {
+                alert(e.content);
+            }
+        }
+        var refreshCommentCount = function()
+        {
+            $("#cmt-count").load("/Articles/CommentCount/@Model.Id");
+        }
+    </script>
+    
+    @*Voting Control*@
+    <script type="text/javascript">
+        
+        $(".ratingStar").click(function () {
+            var url = "/Articles/Vote";
+            $.post(url, { Value: $(this).attr("data-value"), ArticleId: "@Model.Id" }, function (data)
+            {
+                if (data.success == true) {
+                    $("#lbResult").html("Thanks for your voting");
+                    $("#ratingContainer").hide();
+                    $("#ratingAverage").html(data.average)
+                }
+            });
+        });
+
+        $("button#voteBtn").on("click", function () {
+            $("#ratingContainer").show();
+            $("#lbResult").empty();
+        });
+    </script>
+
+}

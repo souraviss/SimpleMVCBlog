@@ -1,0 +1,14 @@
+﻿@model List<CommentView>
+
+@foreach(var cmt in Model)
+{ 
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="@cmt.UserAvatar" alt="Blog Message">
+        </a>
+        <div class="media-body">
+            <a href="#">@cmt.UserName</a> <span class="text-muted">20 minutes ago</span>
+            <p>@cmt.Content</p>
+        </div>
+    </div>
+}

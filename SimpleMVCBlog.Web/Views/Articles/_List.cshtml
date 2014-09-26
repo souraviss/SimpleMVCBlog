@@ -1,0 +1,29 @@
+﻿@model ArticlesListView
+
+@for (int i = 0; i < Model.Articles.Count; i++)
+{
+    var article = Model.Articles[i];
+    <div class="blog-summary">
+        <h4 class="new-story">@Html.ActionLink(article.Title, "Details", "Articles", new { id = article.Id }, null)</h4>
+        <ul class="text-muted list-inline">
+            <li><i class="fa fa-user"></i>@Html.ActionLink(article.CreatedDisplayName, "UserProfile", "Account", new { id = article.CreatedUserId }, null)</li>
+            <li><i class="fa fa-calendar"></i> @article.CreatedTime.ToString("MMM dd yyyy")</li>
+            <li><i class="fa fa-comments-o"></i> @article.Comments.Count comments</li>
+            @if(article.CanEditOrDelete)
+            {
+                <li>@Html.ActionLink("Edit", "Edit", "Articles", new{id=article.Id},null)</li>
+                <li>@Html.ActionLink("Delete", "Delete", "Articles", new { id = article.Id }, null)</li>
+            }
+        </ul>
+        <hr>
+        <p class="blog-text">
+            @Html.Raw(HttpUtility.HtmlDecode(article.ShortBrief))
+        </p>
+        <p class="tags">
+            @foreach (KeywordView kw in article.Keywords)
+            {
+                <a href="/Keyword/@kw.Id">@kw.Name</a>
+            }
+        </p>
+    </div>
+}

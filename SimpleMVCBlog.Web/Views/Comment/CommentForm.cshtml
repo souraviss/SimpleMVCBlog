@@ -1,0 +1,48 @@
+﻿@model CommentModel
+
+@using (Ajax.BeginForm("Create", "Comment", null, new AjaxOptions
+    {
+        HttpMethod = "Post", 
+        OnSuccess = "onSuccessComment"
+    }, new { id = "comment-form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.Hidden("ArticleId", Model.ArticleId)
+
+    if (User.Identity.IsAuthenticated == true)
+    {
+        <div class="col-sm-2 hidden-xs">
+            <img src="img/face1.jpg" alt="..." class="img-responsive">
+        </div>
+        <div class="col-sm-10">
+            <div class="form-group">
+                <label>@Model.UserName</label>
+            </div>
+            <div class="form-group">
+                @Html.TextAreaFor(model => model.Content, new { placeholder = "", @class = "form-control", rows = "3" })
+                @Html.ValidationMessageFor(model => model.Content)
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">
+                <img src="img/face1.jpg" alt="..." class="img-responsive">
+            </div>
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(model => model.UserName, new { placeholder = "Họ và Tên", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName)
+
+
+                @Html.TextAreaFor(model => model.Content, new { placeholder = "", @class = "form-control", rows = "3" })
+                @Html.ValidationMessageFor(model => model.Content)
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-dark btn-sm">Post comment</button>
+        </div>
+    </div>
+}

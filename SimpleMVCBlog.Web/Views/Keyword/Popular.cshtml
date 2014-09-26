@@ -1,0 +1,8 @@
+﻿@model List<KeywordView>
+
+<p class="tags">
+    @foreach(KeywordView kw in Model)
+    {
+        <a href="/Keyword/@kw.Id">@kw.Name</a>
+    }
+</p>

@@ -1,0 +1,125 @@
+﻿@model HomeView
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<div class="container">
+    <!-- Services
+      ================ -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="services">
+                <ul>
+                    <li>
+                        <i class="fa fa-briefcase fa-3x"></i>
+                        <p>Write An Article<br><a href="/Articles/Create">Write...</a></p>
+                    </li>
+                    <li>
+                        <i class="fa fa-cloud-upload fa-3x"></i>
+                        <p>Top 10 Hotest Articles<br><a href="#">View...</a></p>
+                    </li>
+                    <li>
+                        <i class="fa fa-laptop fa-3x"></i>
+                        <p>Lorem ipsum dolor sit amet<br><a href="#">View...</a></p>
+                    </li>
+                    <li>
+                        <i class="fa fa-gears fa-3x"></i>
+                        <p>Lorem ipsum dolor sit amet<br><a href="#">Action...</a></p>
+                    </li>
+                    <li>
+                        <i class="fa fa-compass fa-3x"></i>
+                        <p>Lorem ipsum dolor sit amet<br><a href="#">Action...</a></p>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Left Side Bar
+            ================= -->
+        <div class="col-md-8">
+            <div class="blog-summary clearfix">
+                <div class="block-header">
+                    <h2>
+                        <span class="title">Lastest Articles</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                    </h2>
+                </div>
+                @for (int i = 0; i < Model.Lastest.Count; i++)
+                {
+                    var article = Model.Lastest[i];
+                    <div class="blog-summary">
+                        <h4 class="new-story">@Html.ActionLink(article.Title, "Details", "Articles", new { id = article.Id }, null)</h4>
+                        <ul class="text-muted list-inline">
+                            <li><i class="fa fa-user"></i>@Html.ActionLink(article.CreatedDisplayName, "UserProfile", "Account", new { id = article.CreatedUserId }, null)</li>
+                            <li><i class="fa fa-calendar"></i> @article.CreatedTime.ToString("MMM dd yyyy")</li>
+                            <li><i class="fa fa-comments-o"></i> @article.Comments.Count comments</li>
+                        </ul>
+                        <hr>
+                        <p class="blog-text">
+                            @Html.Raw(HttpUtility.HtmlDecode(article.ShortBrief))
+                        </p>
+                        <p class="tags">
+                            @foreach (KeywordView kw in article.Keywords)
+                            {
+                                <a href="/Keyword/@kw.Id">@kw.Name</a>
+                            }
+                        </p>
+                    </div>
+                }
+                <a href="/Articles" class="read-more">Read more...</a>
+            </div>
+            <div class="blog-summary clearfix">
+                <div class="block-header">
+                    <h2>
+                        <span class="title">Hostest Articles</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                    </h2>
+                </div>
+                @for (int i = 0; i < Model.Hostest.Count; i++)
+                {
+                    var article = Model.Hostest[i];
+                    <div class="blog-summary">
+                        <h4 class="hot-story">@Html.ActionLink(article.Title, "Details", "Articles", new { id = article.Id }, null)</h4>
+                        <ul class="text-muted list-inline">
+                            <li><i class="fa fa-user"></i>@Html.ActionLink(article.CreatedDisplayName, "UserProfile", "Account", new { id = article.CreatedUserId }, null)</li>
+                            <li><i class="fa fa-calendar"></i> @article.CreatedTime.ToString("MMM dd yyyy")</li>
+                            <li><i class="fa fa-comments-o"></i> @article.Comments.Count comments</li>
+                        </ul>
+                        <hr>
+                        <p class="blog-text">
+                            @Html.Raw(HttpUtility.HtmlDecode(article.ShortBrief))
+                        </p>
+                        <p class="tags">
+                            @foreach (KeywordView kw in article.Keywords)
+                            {
+                                <a href="/Keyword/@kw.Id">@kw.Name</a>
+                            }
+                        </p>
+                    </div>
+                }
+                <a href="/Articles/Hotest" class="read-more">Read more...</a>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Last updated-->
+            <div class="">
+                <div class="block-header">
+                    <h2>
+                        <span class="title">Last Comments</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                    </h2>
+                </div>
+                @Html.Action("Recent", "Comment")
+            </div>
+            <!-- Tags -->
+            <div class="">
+                <div class="block-header">
+                    <h2>
+                        <span class="title">Tags</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                    </h2>
+                </div>
+                @Html.Action("Popular", "Keyword")
+            </div>
+        </div>
+    </div>
+   
+</div>

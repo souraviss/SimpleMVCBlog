@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Góc lập trình">
+    <meta name="keywords" content="MVC,JavaScript, Goc lap trinh, Goclaptrinh, lap trinh can ban, thuat toan">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://simpleqode.com/preview/highland/1.4/img/favicon.ico">
+    <title>Blog Lập Trình - @ViewBag.Title</title>
+    <!-- Bootstrap core CSS -->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/froala_editor.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/Content/SyntaxHighlighter/shCore.css" rel="stylesheet" />
+    <link href="~/Content/SyntaxHighlighter/shThemeDefault.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Navbar
+      ============= -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Home">Blog Lập Trình</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Articles <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Articles">Recent Articles</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/Articles/MyArticles">My Articles</a></li>
+                            }
+                        </ul>
+                    </li>
+                    
+                   
+                    <li class="hidden-sm hidden-md"><a href="/Home/About">About</a></li>
+                    <!-- Profile links for extra small screens -->
+                    <li class="visible-xs"><a href="/Account/Login">Sign In</a></li>
+                    <li class="visible-xs"><a href="/Account/Register">Sign Up</a></li>
+                </ul>
+                <!-- Search form for extra small screens -->
+                <form action="/Home/Search" class="navbar-form navbar-left visible-xs" role="search">
+                    <div class="form-group">
+                        <input type="text" name="query" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-blue">Go!</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right hidden-xs">
+                    <!-- Sign in & Sign up -->
+                    @if(!User.Identity.IsAuthenticated)
+                    {
+                        <li id="sign-up" class="show"><a href="/Account/Register">Sign Up</a></li>
+                        <li id="sign-in" class="show"><a href="/Account/Login">Sign In</a></li>
+                    }
+                    else
+                    { 
+                        <!-- Signed in. Profile Menu -->
+                        <li id="cogs-menu">
+                            <a href="/Account/Manage">
+                                <i class="fa fa-gears fa-lg"></i>
+                            </a>
+                        </li>
+                        <li id="profile-menu" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="account">
+                                    <div class="avatar"></div>
+                                   
+                                    <p>
+                                        <a href="/Account/UserProfile">Profile</a> | 
+                                        <a href="/Articles/MyArticles">My Artices</a> | 
+                                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                        }
+                                    </p>
+                                    <div class="clearfix"></div>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    <!-- Search Button -->
+                    <li id="search">
+                        <a href="#" id="search-btn"><i class="fa fa-search" id="search-icon"></i> Search</a>
+                        <div class="search-box hidden" id="search-box">
+                            @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
+                            {
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="query" placeholder="Search">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">Go!</button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="section-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Remove the .animated class if you don't want things to move -->
+                        <h1 class="animated slideInLeft"><span>@ViewBag.Title</span></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                @RenderBody()
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Foooter
+    ================== -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <!-- Contact Us
+                =================  -->
+                <div class="col-sm-4">
+                    <div class="headline"><h3>Contact us</h3></div>
+                    <div class="content">
+                        <p>
+                            Email: <a href="#">admin@@@(Request.Url.Host)</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Social icons
+                ===================== -->
+                <div class="col-sm-4">
+                    <div class="headline"><h3>Go Social</h3></div>
+                    <div class="content social">
+                        <p>Stay in touch with us:</p>
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-youtube"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-github"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-vk"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- Subscribe
+                =============== -->
+                <div class="col-sm-4">
+                    <div class="headline"><h3>Subscribe</h3></div>
+                    <div class="content">
+                        <p>Enter your e-mail below to subscribe to our free newsletter.<br>We promise not to bother you often!</p>
+                        <form class="form" role="form">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <label class="sr-only" for="subscribe-email">Email address</label>
+                                        <input type="email" class="form-control" id="subscribe-email" placeholder="Enter email">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-default">OK</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Legal
+    ============= -->
+    <div class="legal">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>© Blog lập trình @DateTime.Now.Year. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/froala_editor.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>*@
+    <script src="~/Scripts/typeahead.bundle.js"></script>
+    <script src="~/Scripts/bootstrap-tagsinput.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shCore.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shBrushCSharp.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shBrushCss.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shBrushJScript.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+    @RenderSection("scripts", required: false)
+
+    <div id="topcontrol" title="Scroll Back to Top" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;"><div class="scrolltotop"><i class="fa fa-angle-up"></i></div></div>
+</body>
+</html>
+

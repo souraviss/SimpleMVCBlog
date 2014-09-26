@@ -1,0 +1,11 @@
+﻿@model List<ArticleView>
+
+
+<div class="recent-blogs">
+    <ul>
+        @foreach(var article in Model)
+        { 
+            <li>@Html.ActionLink(article.Title, "Details", "Articles", new{id=article.Id}, new {@class="new-story"})</li>
+        }
+    </ul>
+</div>
