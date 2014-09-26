@@ -7,13 +7,13 @@ namespace SimpleMVCBlog.Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class voteaverage : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(voteaverage));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201409040752093_voteaverage"; }
+            get { return "201409261642589_init"; }
         }
         
         string IMigrationMetadata.Source

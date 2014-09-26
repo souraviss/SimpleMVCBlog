@@ -28,13 +28,11 @@ namespace SimpleMVCBlog.Web.Models
         public string CreatedUserId { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime? PublishedTime { get; set; }
-        public double VoteAverage { get; set; }
 
         public virtual SubCategory Category { get; set; }
         [ForeignKey("CreatedUserId")]
         public virtual ApplicationUser CreatedUser { get; set; }
         public virtual ICollection<Keyword> Keywords { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

@@ -194,61 +194,19 @@
       <DependentUpon>FroalaHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PartialViewToStringExtensions.cs" />
-    <Compile Include="Migrations\201408100733194_init.cs" />
-    <Compile Include="Migrations\201408100733194_init.Designer.cs">
-      <DependentUpon>201408100733194_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408101624217_init2.cs" />
-    <Compile Include="Migrations\201408101624217_init2.Designer.cs">
-      <DependentUpon>201408101624217_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408171605030_update1.cs" />
-    <Compile Include="Migrations\201408171605030_update1.Designer.cs">
-      <DependentUpon>201408171605030_update1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408191629068_createedtimearticle.cs" />
-    <Compile Include="Migrations\201408191629068_createedtimearticle.Designer.cs">
-      <DependentUpon>201408191629068_createedtimearticle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408201628365_208.cs" />
-    <Compile Include="Migrations\201408201628365_208.Designer.cs">
-      <DependentUpon>201408201628365_208.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408230344485_adddisplayname.cs" />
-    <Compile Include="Migrations\201408230344485_adddisplayname.Designer.cs">
-      <DependentUpon>201408230344485_adddisplayname.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408231643579_update-username-comment.cs" />
-    <Compile Include="Migrations\201408231643579_update-username-comment.Designer.cs">
-      <DependentUpon>201408231643579_update-username-comment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408251648245_createduserid-article.cs" />
-    <Compile Include="Migrations\201408251648245_createduserid-article.Designer.cs">
-      <DependentUpon>201408251648245_createduserid-article.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408281606245_updateuser.cs" />
-    <Compile Include="Migrations\201408281606245_updateuser.Designer.cs">
-      <DependentUpon>201408281606245_updateuser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409030704411_vote.cs" />
-    <Compile Include="Migrations\201409030704411_vote.Designer.cs">
-      <DependentUpon>201409030704411_vote.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409040752093_voteaverage.cs" />
-    <Compile Include="Migrations\201409040752093_voteaverage.Designer.cs">
-      <DependentUpon>201409040752093_voteaverage.cs</DependentUpon>
+    <Compile Include="Migrations\201409261642589_init.cs" />
+    <Compile Include="Migrations\201409261642589_init.Designer.cs">
+      <DependentUpon>201409261642589_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\SubCategory.cs" />
-    <Compile Include="Models\ArticleVote.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Keyword.cs" />
     <Compile Include="Models\SuperCategory.cs" />
-    <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Startup.cs" />
@@ -265,12 +223,11 @@
     <Compile Include="ViewModels\SearchView.cs" />
     <Compile Include="ViewModels\StatisticsView.cs" />
     <Compile Include="ViewModels\CategoryModel.cs" />
-    <Compile Include="ViewModels\VoteModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-GocLapTrinh.Web-20140810112449.mdf" />
-    <Content Include="App_Data\aspnet-GocLapTrinh.Web-20140810112449_log.ldf">
-      <DependentUpon>aspnet-GocLapTrinh.Web-20140810112449.mdf</DependentUpon>
+    <Content Include="App_Data\aspnet-SimpleMVCBlog.Web-20140810112449.mdf" />
+    <Content Include="App_Data\aspnet-SimpleMVCBlog.Web-20140810112449_log.ldf">
+      <DependentUpon>aspnet-SimpleMVCBlog.Web-20140810112449.mdf</DependentUpon>
     </Content>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-tagsinput.css" />
@@ -334,9 +291,7 @@
     <Content Include="Scripts\froala_editor_ie8.min.js" />
     <Content Include="Scripts\bootstrap-tagsinput.min.js.map" />
     <Content Include="Content\citynames.json" />
-    <None Include="Properties\PublishProfiles\bloglaptrinh-local.pubxml" />
-    <None Include="Properties\PublishProfiles\bloglaptrinh-remote.pubxml" />
-    <None Include="Properties\PublishProfiles\pro.thamnho.com.pubxml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -430,7 +385,6 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\Articles\MyArticles.cshtml" />
-    <Content Include="Views\Articles\VoteControl.cshtml" />
     <Content Include="Views\Keyword\Popular.cshtml" />
     <Content Include="Views\Articles\Recent.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
@@ -443,6 +397,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Avatars\" />
+    <Folder Include="Models\Mappings\" />
     <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
@@ -450,38 +405,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201408100733194_init.resx">
-      <DependentUpon>201408100733194_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408101624217_init2.resx">
-      <DependentUpon>201408101624217_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408171605030_update1.resx">
-      <DependentUpon>201408171605030_update1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408191629068_createedtimearticle.resx">
-      <DependentUpon>201408191629068_createedtimearticle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408201628365_208.resx">
-      <DependentUpon>201408201628365_208.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408230344485_adddisplayname.resx">
-      <DependentUpon>201408230344485_adddisplayname.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408231643579_update-username-comment.resx">
-      <DependentUpon>201408231643579_update-username-comment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408251648245_createduserid-article.resx">
-      <DependentUpon>201408251648245_createduserid-article.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408281606245_updateuser.resx">
-      <DependentUpon>201408281606245_updateuser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409030704411_vote.resx">
-      <DependentUpon>201409030704411_vote.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409040752093_voteaverage.resx">
-      <DependentUpon>201409040752093_voteaverage.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409261642589_init.resx">
+      <DependentUpon>201409261642589_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -21,6 +21,5 @@ namespace SimpleMVCBlog.Web.ViewModels
         public List<CommentView> Comments { get; set; }
         public List<KeywordView> Keywords { get; set; }
 
-        public double VoteAverage { get; set; }
     }
 }

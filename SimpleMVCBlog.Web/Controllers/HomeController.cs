@@ -16,7 +16,7 @@ namespace SimpleMVCBlog.Web.Controllers
             var view = new HomeView
             {
                 Lastest = AutoMapper.Mapper.Map<List<ArticleView>>(db.Articles.OrderBy(a=>a.CreatedTime).Take(5).ToList()),
-                Hostest = AutoMapper.Mapper.Map<List<ArticleView>>(db.Articles.OrderBy(a => a.VoteAverage).Take(5).ToList()),
+                Hostest = AutoMapper.Mapper.Map<List<ArticleView>>(db.Articles.OrderBy(a => a.Comments.Count).Take(5).ToList()),
             };
             return View(view);
         }

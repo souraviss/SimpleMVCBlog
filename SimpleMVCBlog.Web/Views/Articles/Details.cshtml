@@ -19,9 +19,6 @@
         @Html.Raw(HttpUtility.HtmlDecode(Model.MainContent))
     </p>
 
-    <p>
-        @Html.Action("VoteControl", "Articles", new { id = Model.Id})
-    </p>
     <!-- Blog Comments -->
     <!-- Comments Form -->
     <div class="new-comment">
@@ -132,26 +129,5 @@
             $("#cmt-count").load("/Articles/CommentCount/@Model.Id");
         }
     </script>
-    
-    @*Voting Control*@
-    <script type="text/javascript">
-        
-        $(".ratingStar").click(function () {
-            var url = "/Articles/Vote";
-            $.post(url, { Value: $(this).attr("data-value"), ArticleId: "@Model.Id" }, function (data)
-            {
-                if (data.success == true) {
-                    $("#lbResult").html("Thanks for your voting");
-                    $("#ratingContainer").hide();
-                    $("#ratingAverage").html(data.average)
-                }
-            });
-        });
-
-        $("button#voteBtn").on("click", function () {
-            $("#ratingContainer").show();
-            $("#lbResult").empty();
-        });
-    </script>
-
+   
 }

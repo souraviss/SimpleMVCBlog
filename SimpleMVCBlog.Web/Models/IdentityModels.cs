@@ -13,7 +13,6 @@ namespace SimpleMVCBlog.Web.Models
         public string Avartar { get; set; }
         public string About { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
-        public virtual ICollection<Vote> Votes { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

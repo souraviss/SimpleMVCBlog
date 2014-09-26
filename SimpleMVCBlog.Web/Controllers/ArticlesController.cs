@@ -54,9 +54,7 @@ namespace SimpleMVCBlog.Web.Controllers
             var myArticles= db.Articles.Where(a=>a.CreatedUserId== userId).ToList();
             var view = new StatisticsView 
             {
-                ArticlesCount = myArticles.Count,
-                VotesCount = myArticles.Sum(a => a.Votes.Count),
-                VoteAverage = myArticles.Average(a=>a.VoteAverage)
+                ArticlesCount = myArticles.Count
             };
             return PartialView("_MyStatistics", view);
         }
@@ -197,64 +195,8 @@ namespace SimpleMVCBlog.Web.Controllers
             return Content(count.ToString());
         }
 
-        public PartialViewResult VoteControl(int id)
-        {
-            var voteQueryable =  db.Votes.Where(v=>v.ArticleId == id);
-            var voteCount = voteQueryable.Count();
-            
-            var voteModel = new VoteModel { 
-                ArticleId = id,
-                VoteCount = voteCount,
-                VoteAverage = voteCount==0?0: voteQueryable.Average(v=>v.Value)
-            };
-            if(User.Identity.IsAuthenticated)
-            {
-                var userId = User.Identity.GetUserId();
-                var vote = db.Votes.Find(id, userId);
-                if (vote != null)
-                {
-                    voteModel.Value = vote.Value;
-                    voteModel.IsVoted = true;
-                }
-            }
-            return PartialView("VoteControl", voteModel);
-        }
 
-        [Authorize]
-        public JsonResult Vote(VoteModel voteModel)
-        {
-            if (ModelState.IsValid)
-            {
-                string userId = User.Identity.GetUserId();
-                var article = db.Articles.Find(voteModel.ArticleId);
-                if (article != null)
-                {
-                    Vote vote = db.Votes.Find(voteModel.ArticleId, userId);
-                    if (vote == null)
-                    {
-                        vote = new Vote
-                        {
-                            UserId = userId,
-                            ArticleId = voteModel.ArticleId,
-                            Value = voteModel.Value
-                        };
-                        db.Votes.Add(vote);
-                    }
-                    else
-                    {
-                        vote.Value = voteModel.Value;
-                    }
-                    db.SaveChanges();
-                    
-                    var average = db.Votes.Where(v => v.ArticleId == voteModel.ArticleId).Average(v => v.Value);
-                    article.VoteAverage = average;
-                    db.SaveChanges();
-
-                    return Json(new { success = true, average });
-                }
-            }
-            return Json(new {success = false});
-        }
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

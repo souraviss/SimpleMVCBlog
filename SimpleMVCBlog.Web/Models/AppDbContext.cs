@@ -16,19 +16,19 @@ namespace SimpleMVCBlog.Web.Models
         }
 
         public DbSet<Article> Articles { get; set; }
-        //public DbSet<ArticleVote> ArticleVotes { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Keyword> Keywords { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<SuperCategory> SuperCategories { get; set; }
 
-        public DbSet<Vote> Votes { get; set; }
 
         public static AppDbContext Create()
         {
             return new AppDbContext();
         }
-
-        //public System.Data.Entity.DbSet<SimpleMVCBlog.Web.Models.ApplicationUser> ApplicationUsers { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
