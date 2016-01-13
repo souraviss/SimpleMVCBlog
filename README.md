@@ -8,9 +8,13 @@ SimpleMVCBlog was developed by eritnguyen.com
 Hope that it will help you to
 
 Technologies
+
 ASP.NET MVC 5
+
 EF 6 Code First
+
 AutoMapper
+
 Twitter Bootstrap
 
 
