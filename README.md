@@ -7,7 +7,7 @@ SimpleMVCBlog was developed by eritnguyen.com
 
 Hope that it will help you to
 
-Technologies
+<h2>Technologies</h2>
 
 ASP.NET MVC 5
 
